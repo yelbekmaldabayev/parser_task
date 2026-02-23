@@ -1,19 +1,32 @@
 {
   "name": "parser_task",
-  "version": "1.0.0",
-  "description": "Google Search Results Parser - NodeJS + TypeScript",
+  "version": "2.0.0",
+  "description": "Google Search Results Parser - NodeJS + TypeScript with regex, multiple output formats, and analytics",
   "main": "dist/parser.js",
   "scripts": {
     "start": "ts-node parser.ts",
     "build": "tsc",
-    "parse": "ts-node parser.ts google_search.html results.csv"
+    "parse": "ts-node parser.ts google_search.html results",
+    "parse:json": "ts-node parser.ts -f json google_search.html results",
+    "parse:both": "ts-node parser.ts -f both google_search.html results",
+    "parse:verbose": "ts-node parser.ts -v google_search.html results",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch",
+    "help": "ts-node parser.ts --help"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/jest": "^30.0.0",
     "@types/node": "^25.3.0",
+    "jest": "^30.2.0",
+    "ts-jest": "^29.4.6",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "xlsx": "^0.18.5"
   }
 }

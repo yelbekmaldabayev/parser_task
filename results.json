@@ -1,0 +1,108 @@
+{
+  "results": [
+    {
+      "link": "https://gett.com/uk/",
+      "anchor": "Gett - The Official Website | Book a Taxi Online",
+      "snippet": "Gett is a global on-demand mobility company that connects customers with transportation services. Book your ride in seconds and enjoy reliable service.",
+      "domain": "gett.com"
+    },
+    {
+      "link": "https://www.uber.com/",
+      "anchor": "Uber - Request a Ride Now",
+      "snippet": "Uber is a ridesharing app for fast, reliable rides in minutes. Download the app and request a ride. Available in hundreds of cities worldwide.",
+      "domain": "uber.com"
+    },
+    {
+      "link": "https://www.lyft.com/",
+      "anchor": "Lyft - A Ride Whenever You Need One",
+      "snippet": "Request a Lyft ride in seconds. Compare prices and get picked up by a nearby driver. Safe, affordable rides for everyone.",
+      "domain": "lyft.com"
+    },
+    {
+      "link": "https://bolt.eu/en/",
+      "anchor": "Bolt - Fast and Affordable Rides",
+      "snippet": "Bolt offers fast, safe and affordable rides at the tap of a button. Join millions of passengers and drivers using Bolt in 45+ countries.",
+      "domain": "bolt.eu"
+    },
+    {
+      "link": "https://www.freeride.com/taxi",
+      "anchor": "Free Now - Your Taxi App",
+      "snippet": "The easiest way to get a taxi. Compare prices from different services and choose your preferred ride option.",
+      "domain": "freeride.com"
+    },
+    {
+      "link": "https://www.grab.com/sg/transport/",
+      "anchor": "Grab - Southeast Asia's Leading Ride-Hailing App",
+      "snippet": "Download Grab app for the fastest way to book a taxi or private car. Available across Southeast Asia with millions of daily rides.",
+      "domain": "grab.com"
+    },
+    {
+      "link": "https://www.didi.com.au/",
+      "anchor": "DiDi - Your Affordable Ride",
+      "snippet": "DiDi provides safe, affordable and convenient transportation services. Available in Australia and many other countries.",
+      "domain": "didi.com.au"
+    },
+    {
+      "link": "https://www.curb.com/",
+      "anchor": "Curb - The Taxi App",
+      "snippet": "Curb connects you with safe, reliable taxi rides. Book ahead or get a ride now. Pay with card or cash.",
+      "domain": "curb.com"
+    },
+    {
+      "link": "https://www.cabify.com/en",
+      "anchor": "Cabify - Safe and Reliable Rides",
+      "snippet": "Cabify offers professional drivers and comfortable vehicles. Book your ride in Spain and Latin America.",
+      "domain": "cabify.com"
+    },
+    {
+      "link": "https://www.ola.com/",
+      "anchor": "Ola Cabs - India's Most Popular Ride Service",
+      "snippet": "Book Ola cabs for safe and reliable rides across India. Multiple ride options including micro, mini, prime and SUV.",
+      "domain": "ola.com"
+    }
+  ],
+  "nextPageLink": "https://www.google.com/search?q=get+taxi&start=10&sa=N",
+  "statistics": {
+    "totalResults": 10,
+    "domainFrequency": {
+      "gett.com": 1,
+      "uber.com": 1,
+      "lyft.com": 1,
+      "bolt.eu": 1,
+      "freeride.com": 1,
+      "grab.com": 1,
+      "didi.com.au": 1,
+      "curb.com": 1,
+      "cabify.com": 1,
+      "ola.com": 1
+    },
+    "averageSnippetLength": 123,
+    "topDomains": [
+      {
+        "domain": "gett.com",
+        "count": 1
+      },
+      {
+        "domain": "uber.com",
+        "count": 1
+      },
+      {
+        "domain": "lyft.com",
+        "count": 1
+      },
+      {
+        "domain": "bolt.eu",
+        "count": 1
+      },
+      {
+        "domain": "freeride.com",
+        "count": 1
+      }
+    ]
+  },
+  "metadata": {
+    "parsedAt": "2026-02-23T14:35:06.745Z",
+    "sourceFile": "google_search.html",
+    "parserVersion": "2.0.0"
+  }
+}
