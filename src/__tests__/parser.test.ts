@@ -1,6 +1,6 @@
 /**
  * Unit Tests for Google Search Results Parser
- * 
+ *
  * Tests the core functionality of the parser including:
  * - HTML parsing with regex
  * - Domain extraction
@@ -8,15 +8,10 @@
  * - CSV/JSON output formatting
  */
 
-import {
-  GoogleSearchParser,
-  extractDomain,
-  calculateStatistics,
-  escapeCSV,
-  toCSV,
-  toJSON,
-  SearchResult,
-} from "./parser";
+import { GoogleSearchParser } from "../parser/GoogleSearchParser";
+import { extractDomain, calculateStatistics, escapeCSV } from "../utils";
+import { toCSV, toJSON } from "../formatters";
+import { SearchResult } from "../types";
 
 // ============================================================================
 // TEST DATA
@@ -92,7 +87,9 @@ describe("extractDomain", () => {
   });
 
   test("handles subdomains", () => {
-    expect(extractDomain("https://blog.example.com/post")).toBe("blog.example.com");
+    expect(extractDomain("https://blog.example.com/post")).toBe(
+      "blog.example.com",
+    );
   });
 
   test("returns unknown for invalid URLs", () => {
@@ -122,7 +119,6 @@ describe("calculateStatistics", () => {
 
   test("calculates average snippet length", () => {
     const stats = calculateStatistics(sampleResults);
-    // (17 + 18 + 17) / 3 = 17.33 -> rounded to 17
     expect(stats.averageSnippetLength).toBeGreaterThan(0);
   });
 
@@ -163,7 +159,7 @@ describe("escapeCSV", () => {
 
   test("handles combination of special characters", () => {
     expect(escapeCSV('text, with "all" special\nchars')).toBe(
-      '"text, with ""all"" special\nchars"'
+      '"text, with ""all"" special\nchars"',
     );
   });
 });
@@ -176,14 +172,14 @@ describe("GoogleSearchParser", () => {
   test("parses search results from HTML", () => {
     const parser = new GoogleSearchParser(sampleHtml);
     const data = parser.parse("test.html");
-    
+
     expect(data.results.length).toBeGreaterThan(0);
   });
 
   test("extracts next page link", () => {
     const parser = new GoogleSearchParser(sampleHtml);
     const data = parser.parse("test.html");
-    
+
     expect(data.nextPageLink).toContain("google.com");
     expect(data.nextPageLink).toContain("start=10");
   });
@@ -191,7 +187,7 @@ describe("GoogleSearchParser", () => {
   test("includes metadata", () => {
     const parser = new GoogleSearchParser(sampleHtml);
     const data = parser.parse("test.html");
-    
+
     expect(data.metadata.sourceFile).toBe("test.html");
     expect(data.metadata.parserVersion).toBeDefined();
     expect(data.metadata.parsedAt).toBeDefined();
@@ -200,7 +196,7 @@ describe("GoogleSearchParser", () => {
   test("includes statistics", () => {
     const parser = new GoogleSearchParser(sampleHtml);
     const data = parser.parse("test.html");
-    
+
     expect(data.statistics).toBeDefined();
     expect(data.statistics.totalResults).toBeGreaterThanOrEqual(0);
   });
@@ -208,7 +204,7 @@ describe("GoogleSearchParser", () => {
   test("handles empty HTML gracefully", () => {
     const parser = new GoogleSearchParser("");
     const data = parser.parse("empty.html");
-    
+
     expect(data.results).toHaveLength(0);
     expect(data.nextPageLink).toBeNull();
   });
@@ -223,7 +219,7 @@ describe("toCSV", () => {
     const parser = new GoogleSearchParser(sampleHtml);
     const data = parser.parse("test.html");
     const csv = toCSV(data);
-    
+
     expect(csv).toContain("Link,Anchor,Snippet,Domain");
   });
 
@@ -231,7 +227,7 @@ describe("toCSV", () => {
     const parser = new GoogleSearchParser(sampleHtml);
     const data = parser.parse("test.html");
     const csv = toCSV(data);
-    
+
     expect(csv).toContain("# METADATA");
     expect(csv).toContain("Parser Version");
   });
@@ -242,7 +238,7 @@ describe("toJSON", () => {
     const parser = new GoogleSearchParser(sampleHtml);
     const data = parser.parse("test.html");
     const json = toJSON(data);
-    
+
     expect(() => JSON.parse(json)).not.toThrow();
   });
 
@@ -251,7 +247,7 @@ describe("toJSON", () => {
     const data = parser.parse("test.html");
     const json = toJSON(data);
     const parsed = JSON.parse(json);
-    
+
     expect(parsed).toHaveProperty("results");
     expect(parsed).toHaveProperty("nextPageLink");
     expect(parsed).toHaveProperty("statistics");

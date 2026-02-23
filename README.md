@@ -1,4 +1,4 @@
-# 🔍 Google Search Results Parser
+# Google Search Results Parser
 
 <p align="center">
   <strong>A professional TypeScript tool for parsing Google search results using regular expressions</strong>
@@ -8,30 +8,32 @@
   <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript">
   <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js">
   <img src="https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white" alt="Jest">
-  <img src="https://img.shields.io/badge/version-2.0.0-blue?style=for-the-badge" alt="Version">
+  <img src="https://img.shields.io/badge/version-2.1.0-blue?style=for-the-badge" alt="Version">
 </p>
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
-- [Overview](#-overview)
-- [Features](#-features)
-- [Installation](#-installation)
-- [Usage](#-usage)
-- [Output Formats](#-output-formats)
-- [CLI Options](#-cli-options)
-- [Testing](#-testing)
-- [Architecture](#-architecture)
-- [API Reference](#-api-reference)
+- [Overview](#overview)
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Output Formats](#output-formats)
+- [CLI Options](#cli-options)
+- [Testing](#testing)
+- [Architecture](#architecture)
+- [API Reference](#api-reference)
 
 ---
 
-## 🎯 Overview
+## Overview
 
 This project is a solution for the following technical task:
 
 > Using NodeJS + TypeScript:
+>
 > 1. Parse Google search results HTML for the query "get taxi"
 > 2. Extract links, anchors, snippets, and next page link using **regular expressions**
 > 3. Save results to CSV format
@@ -40,33 +42,74 @@ This project is a solution for the following technical task:
 
 This implementation goes **beyond the basic requirements** with:
 
-- ✨ **Multiple output formats** (CSV & JSON)
-- 📊 **Analytics & Statistics** (domain frequency, averages)
-- 🖥️ **Professional CLI** with help menu and flags
-- 🧪 **Comprehensive unit tests** with Jest
-- 📝 **Clean, documented code** following best practices
-- 🏗️ **Object-oriented design** with exported classes
+- **Multiple output formats** (CSV & JSON)
+- **Analytics & Statistics** (domain frequency, averages)
+- **Professional CLI** with help menu and flags
+- **Comprehensive unit tests** (26 tests) with Jest
+- **Clean, modular architecture** with separation of concerns
+- **Object-oriented design** with exported classes and interfaces
 
 ---
 
-## ✨ Features
+## Features
 
-| Feature | Description |
-|---------|-------------|
-| 🔗 **Link Extraction** | Extracts all result URLs using regex |
-| 📌 **Anchor Extraction** | Parses clickable title text |
-| 📝 **Snippet Extraction** | Captures description text |
-| ➡️ **Next Page Link** | Finds pagination link |
-| 🌐 **Domain Analysis** | Extracts and counts domains |
-| 📈 **Statistics** | Calculates averages and frequencies |
-| 📄 **CSV Export** | Standard comma-separated format |
-| 📋 **JSON Export** | Structured data with metadata |
-| 🖥️ **CLI Interface** | Professional command-line tool |
-| 🧪 **Unit Tests** | 20+ tests with Jest |
+| Feature            | Description                          |
+| ------------------ | ------------------------------------ |
+| Link Extraction    | Extracts all result URLs using regex |
+| Anchor Extraction  | Parses clickable title text          |
+| Snippet Extraction | Captures description text            |
+| Next Page Link     | Finds pagination link                |
+| Domain Analysis    | Extracts and counts domains          |
+| Statistics         | Calculates averages and frequencies  |
+| CSV Export         | Standard comma-separated format      |
+| JSON Export        | Structured data with metadata        |
+| CLI Interface      | Professional command-line tool       |
+| Unit Tests         | 26 tests with Jest                   |
 
 ---
 
-## 🚀 Installation
+## Project Structure
+
+```
+parser_task/
+├── src/
+│   ├── types/              # TypeScript interfaces
+│   │   └── index.ts        # SearchResult, ParsedData, Statistics, etc.
+│   ├── utils/              # Utility functions
+│   │   └── index.ts        # extractDomain, calculateStatistics, escapeCSV
+│   ├── formatters/         # Output formatters
+│   │   └── index.ts        # toCSV, toJSON
+│   ├── parser/             # Parser class
+│   │   ├── GoogleSearchParser.ts
+│   │   └── index.ts
+│   ├── cli/                # CLI handling
+│   │   └── index.ts        # parseArgs, showHelp, printResults
+│   ├── constants.ts        # Application constants
+│   ├── index.ts            # Main entry point
+│   └── __tests__/          # Unit tests
+│       └── parser.test.ts
+├── google_search.html      # Sample input file
+├── results.csv             # CSV output
+├── results.json            # JSON output
+├── jest.config.js          # Test configuration
+├── tsconfig.json           # TypeScript configuration
+└── package.json            # Project dependencies
+```
+
+### Why This Structure?
+
+| Folder        | Purpose                                                |
+| ------------- | ------------------------------------------------------ |
+| `types/`      | Centralized TypeScript interfaces for reusability      |
+| `utils/`      | Pure helper functions that can be tested independently |
+| `formatters/` | Output format converters, easily extendable            |
+| `parser/`     | Core parsing logic, single responsibility              |
+| `cli/`        | Command-line interface, separate from business logic   |
+| `__tests__/`  | Co-located tests following Jest conventions            |
+
+---
+
+## Installation
 
 ```bash
 # Clone the repository
@@ -79,7 +122,7 @@ npm install
 
 ---
 
-## 💻 Usage
+## Usage
 
 ### Quick Start
 
@@ -88,7 +131,7 @@ npm install
 npm start
 
 # Or run directly
-npx ts-node parser.ts
+npx ts-node src/index.ts
 ```
 
 ### Common Commands
@@ -114,16 +157,16 @@ npm run help
 
 ```bash
 # Specify input and output files
-npx ts-node parser.ts my_search.html my_results
+npx ts-node src/index.ts my_search.html my_results
 
 # With format option
-npx ts-node parser.ts -f json my_search.html output
-npx ts-node parser.ts --format both --verbose input.html results
+npx ts-node src/index.ts -f json my_search.html output
+npx ts-node src/index.ts --format both --verbose input.html results
 ```
 
 ---
 
-## 📄 Output Formats
+## Output Formats
 
 ### CSV Output (`results.csv`)
 
@@ -134,7 +177,7 @@ https://www.uber.com/,Uber - Request a Ride,Description...,uber.com
 
 # METADATA
 Parsed At,2026-02-23T18:00:00.000Z
-Parser Version,2.0.0
+Parser Version,2.1.0
 Total Results,10
 
 # NEXT PAGE
@@ -167,22 +210,22 @@ uber.com,1
   "metadata": {
     "parsedAt": "2026-02-23T18:00:00.000Z",
     "sourceFile": "google_search.html",
-    "parserVersion": "2.0.0"
+    "parserVersion": "2.1.0"
   }
 }
 ```
 
 ---
 
-## 🖥️ CLI Options
+## CLI Options
 
 ```
-╔════════════════════════════════════════════════════════════════╗
-║         Google Search Results Parser v2.0.0                    ║
-╚════════════════════════════════════════════════════════════════╝
+======================================================================
+         Google Search Results Parser v2.1.0
+======================================================================
 
 USAGE:
-  npx ts-node parser.ts [options] [input] [output]
+  npx ts-node src/index.ts [options] [input] [output]
 
 ARGUMENTS:
   input           Input HTML file (default: google_search.html)
@@ -194,15 +237,15 @@ OPTIONS:
   -v, --verbose   Show detailed output with all results
 
 EXAMPLES:
-  npx ts-node parser.ts
-  npx ts-node parser.ts google.html output
-  npx ts-node parser.ts -f json search.html results
-  npx ts-node parser.ts --format both --verbose
+  npx ts-node src/index.ts
+  npx ts-node src/index.ts google.html output
+  npx ts-node src/index.ts -f json search.html results
+  npx ts-node src/index.ts --format both --verbose
 ```
 
 ---
 
-## 🧪 Testing
+## Testing
 
 The project includes comprehensive unit tests using Jest.
 
@@ -220,90 +263,100 @@ npm run test:watch
 ### Test Coverage
 
 Tests cover:
-- ✅ Domain extraction from URLs
-- ✅ Statistics calculation
-- ✅ CSV escaping special characters
-- ✅ HTML parsing with multiple patterns
-- ✅ Next page link extraction
-- ✅ Empty/edge case handling
-- ✅ Output formatters (CSV & JSON)
+
+- Domain extraction from URLs
+- Statistics calculation
+- CSV escaping special characters
+- HTML parsing with multiple patterns
+- Next page link extraction
+- Empty/edge case handling
+- Output formatters (CSV & JSON)
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
-```
-parser_task/
-├── parser.ts           # Main parser with CLI
-├── parser.test.ts      # Unit tests
-├── google_search.html  # Sample input file
-├── results.csv         # CSV output
-├── results.json        # JSON output
-├── jest.config.js      # Test configuration
-├── tsconfig.json       # TypeScript configuration
-└── package.json        # Project dependencies
-```
-
-### Code Structure
+### Interfaces (`src/types/index.ts`)
 
 ```typescript
-// Interfaces
-interface SearchResult { link, anchor, snippet, domain }
-interface ParsedData { results, nextPageLink, statistics, metadata }
-interface Statistics { totalResults, domainFrequency, averageSnippetLength, topDomains }
-
-// Main Class
-class GoogleSearchParser {
-  parse(): ParsedData
-  extractResults(): SearchResult[]
-  extractNextPageLink(): string | null
+interface SearchResult {
+  link: string;
+  anchor: string;
+  snippet: string;
+  domain: string;
 }
 
-// Helper Functions
-extractDomain(url): string
-calculateStatistics(results): Statistics
-escapeCSV(str): string
-toCSV(data): string
-toJSON(data): string
+interface ParsedData {
+  results: SearchResult[];
+  nextPageLink: string | null;
+  statistics: Statistics;
+  metadata: Metadata;
+}
+
+interface Statistics {
+  totalResults: number;
+  domainFrequency: Record<string, number>;
+  averageSnippetLength: number;
+  topDomains: DomainCount[];
+}
+```
+
+### Main Class (`src/parser/GoogleSearchParser.ts`)
+
+```typescript
+class GoogleSearchParser {
+  constructor(html: string);
+  parse(sourceFile: string): ParsedData;
+}
+```
+
+### Helper Functions (`src/utils/index.ts`)
+
+```typescript
+extractDomain(url: string): string
+calculateStatistics(results: SearchResult[]): Statistics
+escapeCSV(str: string): string
 ```
 
 ---
 
-## 📚 API Reference
+## API Reference
 
 ### GoogleSearchParser
 
 ```typescript
-import { GoogleSearchParser } from './parser';
+import { GoogleSearchParser } from "./src/parser";
 
 const parser = new GoogleSearchParser(htmlString);
-const data = parser.parse('source.html');
+const data = parser.parse("source.html");
 
-console.log(data.results);        // SearchResult[]
-console.log(data.nextPageLink);   // string | null
-console.log(data.statistics);     // Statistics
-console.log(data.metadata);       // Metadata
+console.log(data.results); // SearchResult[]
+console.log(data.nextPageLink); // string | null
+console.log(data.statistics); // Statistics
+console.log(data.metadata); // Metadata
 ```
 
-### Helper Functions
+### Importing Types
 
 ```typescript
-import { extractDomain, calculateStatistics, toCSV, toJSON } from './parser';
+import { SearchResult, ParsedData, Statistics, Metadata } from "./src/types";
+```
+
+### Using Utility Functions
+
+```typescript
+import { extractDomain, calculateStatistics, escapeCSV } from "./src/utils";
 
 // Extract domain from URL
-extractDomain('https://www.example.com/page'); // 'example.com'
+extractDomain("https://www.example.com/page"); // 'example.com'
 
 // Calculate statistics from results
 const stats = calculateStatistics(searchResults);
-
-// Convert to output format
-const csv = toCSV(parsedData);
-const json = toJSON(parsedData);
 ```
 
 ---
 
-## 📜 Regular Expressions Used
+## Regular Expressions Used
 
 The parser uses multiple regex patterns to handle different Google HTML structures:
 
@@ -325,26 +378,26 @@ The parser uses multiple regex patterns to handle different Google HTML structur
 
 ---
 
-## 🛠️ Technical Decisions
+## Technical Decisions
 
-| Decision | Rationale |
-|----------|-----------|
-| **Regex over DOM parsing** | Task requirement; demonstrates regex proficiency |
+| Decision                    | Rationale                                                |
+| --------------------------- | -------------------------------------------------------- |
+| **Regex over DOM parsing**  | Task requirement; demonstrates regex proficiency         |
 | **Multiple regex patterns** | Google HTML varies; fallback patterns ensure reliability |
-| **Class-based architecture** | Clean, testable, exportable code |
-| **Statistics included** | Added value; shows analytical thinking |
-| **CLI with flags** | Professional tool design |
-| **Jest for testing** | Industry standard; good coverage reporting |
+| **Modular architecture**    | Clean separation of concerns, testable code              |
+| **TypeScript strict mode**  | Type safety, better IDE support                          |
+| **Statistics included**     | Added value; shows analytical thinking                   |
+| **Jest for testing**        | Industry standard; good coverage reporting               |
 
 ---
 
-## 📝 License
+## License
 
 ISC
 
 ---
 
-## 👤 Author
+## Author
 
 **Yelbek Maldabayev**
 
@@ -353,5 +406,5 @@ ISC
 ---
 
 <p align="center">
-  Made with ❤️ using TypeScript
+  Made with TypeScript
 </p>
