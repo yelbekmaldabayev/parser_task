@@ -1,0 +1,19 @@
+{
+  "name": "parser_task",
+  "version": "1.0.0",
+  "description": "Google Search Results Parser - NodeJS + TypeScript",
+  "main": "dist/parser.js",
+  "scripts": {
+    "start": "ts-node parser.ts",
+    "build": "tsc",
+    "parse": "ts-node parser.ts google_search.html results.csv"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^25.3.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
