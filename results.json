@@ -1,108 +1,83 @@
 {
   "results": [
     {
+      "type": "ad",
+      "link": "https://www.gettaxi.com/book",
+      "anchor": "GetTaxi - Book a Taxi Online in Seconds",
+      "snippet": "Book your taxi ride in seconds. Fast, reliable service with professional drivers. Available 24/7 in major cities. Download the app now."
+    },
+    {
+      "type": "ad",
+      "link": "https://www.uber.com/ride",
+      "anchor": "Uber - Get a Ride in Minutes",
+      "snippet": "Request a ride with Uber. Affordable prices, safe rides, and available in hundreds of cities. Sign up and get your first ride free."
+    },
+    {
+      "type": "ad",
+      "link": "https://www.bolt.eu/en/ride",
+      "anchor": "Bolt - Fast and Affordable Taxi",
+      "snippet": "Get a taxi with Bolt. Enjoy fast pickups, professional drivers, and the best prices. Available in 45+ countries. Download the app."
+    },
+    {
+      "type": "organic",
       "link": "https://gett.com/uk/",
-      "anchor": "Gett - The Official Website | Book a Taxi Online",
-      "snippet": "Gett is a global on-demand mobility company that connects customers with transportation services. Book your ride in seconds and enjoy reliable service.",
-      "domain": "gett.com"
+      "anchor": "Gett | Ground Transportation Management Platform",
+      "snippet": "Gett is a global on-demand mobility company offering corporate ground transportation management. Book rides for business travel, airport transfers and daily commutes."
     },
     {
-      "link": "https://www.uber.com/",
-      "anchor": "Uber - Request a Ride Now",
-      "snippet": "Uber is a ridesharing app for fast, reliable rides in minutes. Download the app and request a ride. Available in hundreds of cities worldwide.",
-      "domain": "uber.com"
-    },
-    {
+      "type": "organic",
       "link": "https://www.lyft.com/",
       "anchor": "Lyft - A Ride Whenever You Need One",
-      "snippet": "Request a Lyft ride in seconds. Compare prices and get picked up by a nearby driver. Safe, affordable rides for everyone.",
-      "domain": "lyft.com"
+      "snippet": "Request a Lyft ride in seconds. Compare prices and get picked up by a nearby driver. Safe, affordable rides for everyone. Available in the US and Canada."
     },
     {
-      "link": "https://bolt.eu/en/",
-      "anchor": "Bolt - Fast and Affordable Rides",
-      "snippet": "Bolt offers fast, safe and affordable rides at the tap of a button. Join millions of passengers and drivers using Bolt in 45+ countries.",
-      "domain": "bolt.eu"
+      "type": "organic",
+      "link": "https://www.freenow.com/",
+      "anchor": "FREE NOW - The Mobility Super App",
+      "snippet": "FREE NOW (formerly mytaxi) is Europe's largest taxi app. Book a taxi, private driver, or e-scooter in 150+ cities across Europe."
     },
     {
-      "link": "https://www.freeride.com/taxi",
-      "anchor": "Free Now - Your Taxi App",
-      "snippet": "The easiest way to get a taxi. Compare prices from different services and choose your preferred ride option.",
-      "domain": "freeride.com"
-    },
-    {
+      "type": "organic",
       "link": "https://www.grab.com/sg/transport/",
-      "anchor": "Grab - Southeast Asia's Leading Ride-Hailing App",
-      "snippet": "Download Grab app for the fastest way to book a taxi or private car. Available across Southeast Asia with millions of daily rides.",
-      "domain": "grab.com"
+      "anchor": "Grab - Southeast Asia's #1 Ride-Hailing App",
+      "snippet": "Download Grab app for the fastest way to book a taxi or private car. Available across Southeast Asia with millions of daily rides. Safe and reliable."
     },
     {
-      "link": "https://www.didi.com.au/",
-      "anchor": "DiDi - Your Affordable Ride",
-      "snippet": "DiDi provides safe, affordable and convenient transportation services. Available in Australia and many other countries.",
-      "domain": "didi.com.au"
-    },
-    {
+      "type": "organic",
       "link": "https://www.curb.com/",
       "anchor": "Curb - The Taxi App",
-      "snippet": "Curb connects you with safe, reliable taxi rides. Book ahead or get a ride now. Pay with card or cash.",
-      "domain": "curb.com"
+      "snippet": "Curb connects riders with safe, licensed taxi and for-hire vehicle drivers. Available in 65+ US cities. Pay with card directly through the app."
     },
     {
+      "type": "organic",
       "link": "https://www.cabify.com/en",
-      "anchor": "Cabify - Safe and Reliable Rides",
-      "snippet": "Cabify offers professional drivers and comfortable vehicles. Book your ride in Spain and Latin America.",
-      "domain": "cabify.com"
+      "anchor": "Cabify - Book a Ride with Professional Drivers",
+      "snippet": "Cabify offers professional drivers and comfortable vehicles. Book your ride in Spain and Latin America. Corporate accounts available for businesses."
     },
     {
+      "type": "organic",
+      "link": "https://www.didi.com/en",
+      "anchor": "DiDi - Your Ride, Your Way",
+      "snippet": "DiDi provides ride-hailing services in more than 15 countries. Safe, affordable and convenient transportation with multiple ride options."
+    },
+    {
+      "type": "organic",
       "link": "https://www.ola.com/",
       "anchor": "Ola Cabs - India's Most Popular Ride Service",
-      "snippet": "Book Ola cabs for safe and reliable rides across India. Multiple ride options including micro, mini, prime and SUV.",
-      "domain": "ola.com"
+      "snippet": "Book Ola cabs for safe and reliable rides across India. Multiple ride options including micro, mini, prime and SUV. Over 1.5 million drivers."
+    },
+    {
+      "type": "organic",
+      "link": "https://www.wikihow.com/Get-a-Taxi",
+      "anchor": "How to Get a Taxi: 8 Steps (with Pictures) - wikiHow",
+      "snippet": "Learn how to hail a taxi on the street, call a cab company, or use a ride-sharing app. Tips for getting a taxi in different cities and countries."
+    },
+    {
+      "type": "organic",
+      "link": "https://en.wikipedia.org/wiki/Taxicab",
+      "anchor": "Taxicab - Wikipedia",
+      "snippet": "A taxicab, also known as a taxi or a cab, is a type of vehicle for hire with a driver. Used by a single passenger or small group for a non-shared ride."
     }
   ],
-  "nextPageLink": "https://www.google.com/search?q=get+taxi&start=10&sa=N",
-  "statistics": {
-    "totalResults": 10,
-    "domainFrequency": {
-      "gett.com": 1,
-      "uber.com": 1,
-      "lyft.com": 1,
-      "bolt.eu": 1,
-      "freeride.com": 1,
-      "grab.com": 1,
-      "didi.com.au": 1,
-      "curb.com": 1,
-      "cabify.com": 1,
-      "ola.com": 1
-    },
-    "averageSnippetLength": 123,
-    "topDomains": [
-      {
-        "domain": "gett.com",
-        "count": 1
-      },
-      {
-        "domain": "uber.com",
-        "count": 1
-      },
-      {
-        "domain": "lyft.com",
-        "count": 1
-      },
-      {
-        "domain": "bolt.eu",
-        "count": 1
-      },
-      {
-        "domain": "freeride.com",
-        "count": 1
-      }
-    ]
-  },
-  "metadata": {
-    "parsedAt": "2026-02-23T14:35:06.745Z",
-    "sourceFile": "google_search.html",
-    "parserVersion": "2.0.0"
-  }
+  "nextPageLink": "https://www.google.com/search?q=get+taxi&ei=abc123&start=10&sa=N"
 }

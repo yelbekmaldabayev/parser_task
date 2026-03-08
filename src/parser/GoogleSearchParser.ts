@@ -1,82 +1,62 @@
-/**
- * Google Search Parser Class
- * @module parser
- */
-
-import { ParsedData, SearchResult } from "../types";
-import { extractDomain, calculateStatistics } from "../utils";
-import { VERSION } from "../constants";
+import { ParsedData, SearchResult, ResultType } from "../types";
+import { stripHtml } from "../utils";
 
 /**
- * GoogleSearchParser - Main parser class for extracting search results
+ * Парсер результатов поиска Google.
+ * Извлекает ссылки, анкоры, сниппеты и ссылку на следующую страницу
+ * с помощью регулярных выражений.
  */
 export class GoogleSearchParser {
   private html: string;
-  private normalizedHtml: string;
 
   constructor(html: string) {
     this.html = html;
-    this.normalizedHtml = html.replace(/\n/g, " ").replace(/\s+/g, " ");
   }
 
   /**
-   * Parse the HTML and extract all search results
-   * @param sourceFile - Name of the source file for metadata
-   * @returns ParsedData object with results, statistics, and metadata
+   * Парсинг HTML и извлечение всех результатов
    */
-  public parse(sourceFile: string): ParsedData {
-    const results = this.extractResults();
+  public parse(): ParsedData {
+    const results = [...this.extractAds(), ...this.extractOrganic()];
     const nextPageLink = this.extractNextPageLink();
-    const statistics = calculateStatistics(results);
 
-    return {
-      results,
-      nextPageLink,
-      statistics,
-      metadata: {
-        parsedAt: new Date().toISOString(),
-        sourceFile,
-        parserVersion: VERSION,
-      },
-    };
+    return { results, nextPageLink };
   }
 
   /**
-   * Extract search results using multiple regex patterns
+   * Извлечение рекламных результатов.
+   * Рекламные блоки в Google обёрнуты в div с id="tads" (top ads) или id="bottomads".
    */
-  private extractResults(): SearchResult[] {
-    let results = this.extractResultsPrimaryPattern();
-
-    if (results.length === 0) {
-      results = this.extractResultsAlternativePattern();
-    }
-
-    return results;
-  }
-
-  /**
-   * Primary extraction pattern for modern Google HTML structure
-   */
-  private extractResultsPrimaryPattern(): SearchResult[] {
+  private extractAds(): SearchResult[] {
     const results: SearchResult[] = [];
 
-    const resultBlockRegex =
-      /<div class="g">\s*<div class="yuRUbf">\s*<a href="([^"]+)"[^>]*>\s*<h3[^>]*>([^<]+)<\/h3>\s*<\/a>\s*<\/div>\s*<div class="VwiC3b">([^<]+)<\/div>\s*<\/div>/gi;
+    // Ищем весь блок рекламы (#tads / #bottomads)
+    const adContainerRegex =
+      /<div[^>]*id="(tads|bottomads)"[^>]*>([\s\S]*?)(?=<\/div>\s*<!--|<div id="search"|<div id="res"|$)/gi;
+    let containerMatch: RegExpExecArray | null;
 
-    let match: RegExpExecArray | null;
+    while ((containerMatch = adContainerRegex.exec(this.html)) !== null) {
+      const container = containerMatch[2] ?? "";
 
-    while ((match = resultBlockRegex.exec(this.normalizedHtml)) !== null) {
-      const link = match[1]?.trim() ?? "";
-      const anchor = match[2]?.trim() ?? "";
-      const snippet = match[3]?.trim() ?? "";
+      // Внутри контейнера ищем каждый результат по <a href> + <h3>
+      const adItemRegex =
+        /<a[^>]*href="(https?:\/\/[^"]+)"[^>]*>[\s\S]*?<h3[^>]*>([\s\S]*?)<\/h3>/gi;
+      let itemMatch: RegExpExecArray | null;
 
-      if (link && anchor) {
-        results.push({
-          link,
-          anchor,
-          snippet,
-          domain: extractDomain(link),
-        });
+      while ((itemMatch = adItemRegex.exec(container)) !== null) {
+        const link = itemMatch[1]?.trim() ?? "";
+        const anchor = stripHtml(itemMatch[2] ?? "");
+
+        if (link && anchor && !results.some((r) => r.link === link)) {
+          // Сниппет — ищем VwiC3b после текущей позиции
+          const snippetSearch = container.substring(itemMatch.index);
+          const snippetMatch = snippetSearch.match(
+            /<div[^>]*class="[^"]*VwiC3b[^"]*"[^>]*>([\s\S]*?)<\/div>/i,
+          );
+          const snippet = stripHtml(snippetMatch?.[1] ?? "");
+
+          results.push({ type: "ad", link, anchor, snippet });
+        }
       }
     }
 
@@ -84,82 +64,123 @@ export class GoogleSearchParser {
   }
 
   /**
-   * Alternative extraction pattern for different Google HTML structures
+   * Извлечение органических результатов.
+   * Органические результаты — блоки <div class="g"> с ссылками внутри.
    */
-  private extractResultsAlternativePattern(): SearchResult[] {
+  private extractOrganic(): SearchResult[] {
     const results: SearchResult[] = [];
 
-    const linkRegex = /<div class="yuRUbf">\s*<a href="([^"]+)"/gi;
-    const anchorRegex = /<h3[^>]*class="[^"]*LC20lb[^"]*"[^>]*>([^<]+)<\/h3>/gi;
-    const snippetRegex = /<div class="VwiC3b[^"]*"[^>]*>([^<]+)</gi;
+    // Ищем каждый блок <div class="g" ...> ... </div></div></div>
+    // Используем greedy match до закрывающих </div>, чтобы захватить и VwiC3b
+    const blockRegex =
+      /<div class="g"[^>]*>([\s\S]*?)<\/div>\s*<\/div>\s*<\/div>/gi;
+
+    let match: RegExpExecArray | null;
+    while ((match = blockRegex.exec(this.html)) !== null) {
+      const block = match[0] ?? "";
+      this.extractResultsFromBlock(block, "organic", results);
+    }
+
+    // Альтернативный паттерн: yuRUbf + VwiC3b (отдельно)
+    if (results.length === 0) {
+      this.extractResultsSeparatePatterns(results);
+    }
+
+    return results;
+  }
+
+  /**
+   * Извлечение результата из одного блока HTML
+   */
+  private extractResultsFromBlock(
+    block: string,
+    type: ResultType,
+    results: SearchResult[],
+  ): void {
+    // Ссылка
+    const linkMatch = block.match(/<a[^>]*href="(https?:\/\/[^"]+)"[^>]*>/i);
+    // Анкор (заголовок) — ищем в <h3>
+    const anchorMatch = block.match(/<h3[^>]*>(.*?)<\/h3>/is);
+    // Сниппет — ищем в <div class="VwiC3b"> или в <span class="...">
+    const snippetMatch =
+      block.match(/<div[^>]*class="[^"]*VwiC3b[^"]*"[^>]*>(.*?)<\/div>/is) ??
+      block.match(/<span[^>]*class="[^"]*VwiC3b[^"]*"[^>]*>(.*?)<\/span>/is);
+
+    const link = linkMatch?.[1]?.trim() ?? "";
+    const anchor = stripHtml(anchorMatch?.[1] ?? "");
+    const snippet = stripHtml(snippetMatch?.[1] ?? "");
+
+    if (link && anchor) {
+      // Не добавляем дубли
+      if (!results.some((r) => r.link === link)) {
+        results.push({ type, link, anchor, snippet });
+      }
+    }
+  }
+
+  /**
+   * Альтернативный способ: отдельно ссылки, анкоры и сниппеты
+   */
+  private extractResultsSeparatePatterns(results: SearchResult[]): void {
+    const linkRegex =
+      /<div[^>]*class="[^"]*yuRUbf[^"]*"[^>]*>\s*<a[^>]*href="(https?:\/\/[^"]+)"/gi;
+    const anchorRegex = /<h3[^>]*class="[^"]*LC20lb[^"]*"[^>]*>(.*?)<\/h3>/gis;
+    const snippetRegex =
+      /<div[^>]*class="[^"]*VwiC3b[^"]*"[^>]*>(.*?)<\/div>/gis;
 
     const links: string[] = [];
     const anchors: string[] = [];
     const snippets: string[] = [];
 
-    let match: RegExpExecArray | null;
-
-    while ((match = linkRegex.exec(this.normalizedHtml)) !== null) {
-      const value = match[1]?.trim();
-      if (value) links.push(value);
+    let m: RegExpExecArray | null;
+    while ((m = linkRegex.exec(this.html)) !== null) {
+      if (m[1]) links.push(m[1].trim());
+    }
+    while ((m = anchorRegex.exec(this.html)) !== null) {
+      if (m[1]) anchors.push(stripHtml(m[1]));
+    }
+    while ((m = snippetRegex.exec(this.html)) !== null) {
+      if (m[1]) snippets.push(stripHtml(m[1]));
     }
 
-    while ((match = anchorRegex.exec(this.normalizedHtml)) !== null) {
-      const value = match[1]?.trim();
-      if (value) anchors.push(value);
-    }
-
-    while ((match = snippetRegex.exec(this.normalizedHtml)) !== null) {
-      const value = match[1]?.trim();
-      if (value) snippets.push(value);
-    }
-
-    const minLength = Math.min(links.length, anchors.length, snippets.length);
-    for (let i = 0; i < minLength; i++) {
-      const link = links[i];
-      const anchor = anchors[i];
-      const snippet = snippets[i];
-      if (link && anchor && snippet) {
-        results.push({
-          link,
-          anchor,
-          snippet,
-          domain: extractDomain(link),
-        });
+    const len = Math.min(links.length, anchors.length);
+    for (let i = 0; i < len; i++) {
+      const link = links[i]!;
+      const anchor = anchors[i]!;
+      const snippet = snippets[i] ?? "";
+      if (link && anchor) {
+        results.push({ type: "organic", link, anchor, snippet });
       }
     }
-
-    return results;
   }
 
   /**
-   * Extract the "Next" page link from search results
+   * Извлечение ссылки на следующую страницу результатов
    */
   private extractNextPageLink(): string | null {
-    const nextPageRegex =
-      /<a[^>]*href="([^"]*(?:start=\d+|\/search\?[^"]*)[^"]*)"[^>]*id="pnnext"/gi;
+    // Паттерн 1: id="pnnext" href="..."
+    const pattern1 = /<a[^>]*id="pnnext"[^>]*href="([^"]+)"/i;
+    const m1 = pattern1.exec(this.html);
+    if (m1?.[1]) return this.normalizeUrl(m1[1]);
 
-    let match = nextPageRegex.exec(this.normalizedHtml);
-    if (match?.[1]) {
-      return this.normalizeUrl(match[1]);
-    }
+    // Паттерн 2: href="..." id="pnnext"
+    const pattern2 = /<a[^>]*href="([^"]+)"[^>]*id="pnnext"/i;
+    const m2 = pattern2.exec(this.html);
+    if (m2?.[1]) return this.normalizeUrl(m2[1]);
 
-    const altNextPageRegex = /id="pnnext"[^>]*href="([^"]*)"/gi;
-    match = altNextPageRegex.exec(this.normalizedHtml);
-    if (match?.[1]) {
-      return this.normalizeUrl(match[1]);
-    }
+    // Паттерн 3: aria-label="Next" или текст "Next"
+    const pattern3 = /<a[^>]*href="([^"]+)"[^>]*aria-label="Next"/i;
+    const m3 = pattern3.exec(this.html);
+    if (m3?.[1]) return this.normalizeUrl(m3[1]);
 
     return null;
   }
 
-  /**
-   * Convert relative URLs to absolute Google URLs
-   */
   private normalizeUrl(url: string): string {
-    if (url.startsWith("/")) {
-      return "https://www.google.com" + url;
+    const decoded = url.replace(/&amp;/g, "&");
+    if (decoded.startsWith("/")) {
+      return "https://www.google.com" + decoded;
     }
-    return url;
+    return decoded;
   }
 }
