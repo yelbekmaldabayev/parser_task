@@ -2,82 +2,94 @@
   "results": [
     {
       "type": "ad",
-      "link": "https://www.gettaxi.com/book",
-      "anchor": "GetTaxi - Book a Taxi Online in Seconds",
-      "snippet": "Book your taxi ride in seconds. Fast, reliable service with professional drivers. Available 24/7 in major cities. Download the app now."
+      "link": "https://www.uber.com/us/en/ride/",
+      "anchor": "Uber Official Site - Request a Ride Now",
+      "snippet": "Go anywhere with Uber. Request a ride, hop in, and go. Available in 10,000+ cities worldwide. Download the app and get your first ride today."
     },
     {
       "type": "ad",
-      "link": "https://www.uber.com/ride",
-      "anchor": "Uber - Get a Ride in Minutes",
-      "snippet": "Request a ride with Uber. Affordable prices, safe rides, and available in hundreds of cities. Sign up and get your first ride free."
+      "link": "https://bolt.eu/en/rides/",
+      "anchor": "Bolt Taxi - Fast and Affordable Rides",
+      "snippet": "Request a ride in seconds and be on your way in minutes. Bolt is Europe's leading mobility super app with rides, scooters, and car-sharing available."
     },
     {
       "type": "ad",
-      "link": "https://www.bolt.eu/en/ride",
-      "anchor": "Bolt - Fast and Affordable Taxi",
-      "snippet": "Get a taxi with Bolt. Enjoy fast pickups, professional drivers, and the best prices. Available in 45+ countries. Download the app."
+      "link": "https://www.gett.com/uk/",
+      "anchor": "Gett Taxi - Corporate Ground Travel Solutions",
+      "snippet": "Gett is a corporate ground transportation management platform. Book taxis and black cars for business travel. Trusted by Fortune 500 companies worldwide."
     },
     {
       "type": "organic",
-      "link": "https://gett.com/uk/",
-      "anchor": "Gett | Ground Transportation Management Platform",
-      "snippet": "Gett is a global on-demand mobility company offering corporate ground transportation management. Book rides for business travel, airport transfers and daily commutes."
+      "link": "https://www.gett.com/",
+      "anchor": "Gett - The Best Ground Travel Solution for Businesses",
+      "snippet": "Ready to ride with Gett? Gett is a corporate ground transportation management platform connecting businesses with taxi and black car services in major cities."
+    },
+    {
+      "type": "organic",
+      "link": "https://www.uber.com/",
+      "anchor": "Uber - Go Anywhere | Request a Ride",
+      "snippet": "Go anywhere with Uber. Request a ride, hop in, and go. Make money by driving or delivering with Uber. Uber is available in 10,000+ cities worldwide."
+    },
+    {
+      "type": "organic",
+      "link": "https://www.gettransfer.com/",
+      "anchor": "GetTransfer.com - Private Transfers and Airport Taxi Service",
+      "snippet": "Best Prices From The Best Drivers In All Countries. Book private transfers and airport taxi rides. Compare driver offers on our marketplace. Over 10 million happy customers in 180+ countries."
+    },
+    {
+      "type": "organic",
+      "link": "https://bolt.eu/",
+      "anchor": "Bolt - Request a Ride in Seconds | Mobility Super App",
+      "snippet": "Bolt is Europe's first mobility super app. Get a taxi ride, rent a scooter, or order food delivery - all in one app. Available in 45+ countries and 600+ cities."
     },
     {
       "type": "organic",
       "link": "https://www.lyft.com/",
       "anchor": "Lyft - A Ride Whenever You Need One",
-      "snippet": "Request a Lyft ride in seconds. Compare prices and get picked up by a nearby driver. Safe, affordable rides for everyone. Available in the US and Canada."
-    },
-    {
-      "type": "organic",
-      "link": "https://www.freenow.com/",
-      "anchor": "FREE NOW - The Mobility Super App",
-      "snippet": "FREE NOW (formerly mytaxi) is Europe's largest taxi app. Book a taxi, private driver, or e-scooter in 150+ cities across Europe."
-    },
-    {
-      "type": "organic",
-      "link": "https://www.grab.com/sg/transport/",
-      "anchor": "Grab - Southeast Asia's #1 Ride-Hailing App",
-      "snippet": "Download Grab app for the fastest way to book a taxi or private car. Available across Southeast Asia with millions of daily rides. Safe and reliable."
-    },
-    {
-      "type": "organic",
-      "link": "https://www.curb.com/",
-      "anchor": "Curb - The Taxi App",
-      "snippet": "Curb connects riders with safe, licensed taxi and for-hire vehicle drivers. Available in 65+ US cities. Pay with card directly through the app."
-    },
-    {
-      "type": "organic",
-      "link": "https://www.cabify.com/en",
-      "anchor": "Cabify - Book a Ride with Professional Drivers",
-      "snippet": "Cabify offers professional drivers and comfortable vehicles. Book your ride in Spain and Latin America. Corporate accounts available for businesses."
-    },
-    {
-      "type": "organic",
-      "link": "https://www.didi.com/en",
-      "anchor": "DiDi - Your Ride, Your Way",
-      "snippet": "DiDi provides ride-hailing services in more than 15 countries. Safe, affordable and convenient transportation with multiple ride options."
-    },
-    {
-      "type": "organic",
-      "link": "https://www.ola.com/",
-      "anchor": "Ola Cabs - India's Most Popular Ride Service",
-      "snippet": "Book Ola cabs for safe and reliable rides across India. Multiple ride options including micro, mini, prime and SUV. Over 1.5 million drivers."
-    },
-    {
-      "type": "organic",
-      "link": "https://www.wikihow.com/Get-a-Taxi",
-      "anchor": "How to Get a Taxi: 8 Steps (with Pictures) - wikiHow",
-      "snippet": "Learn how to hail a taxi on the street, call a cab company, or use a ride-sharing app. Tips for getting a taxi in different cities and countries."
+      "snippet": "Lyft is your friend with a car, whenever you need one. Download the app and get a ride in minutes. Or sign up to drive and earn money on your schedule."
     },
     {
       "type": "organic",
       "link": "https://en.wikipedia.org/wiki/Taxicab",
       "anchor": "Taxicab - Wikipedia",
-      "snippet": "A taxicab, also known as a taxi or a cab, is a type of vehicle for hire with a driver. Used by a single passenger or small group for a non-shared ride."
+      "snippet": "A taxicab, also known as a taxi or a cab, is a type of vehicle for hire with a driver, used by a single passenger or small group of passengers, often for a non-shared ride. A taxicab conveys passengers between locations of their choice."
+    },
+    {
+      "type": "organic",
+      "link": "https://www.wikihow.com/Hail-a-Taxi",
+      "anchor": "How to Hail a Taxi: 12 Steps (with Pictures) - wikiHow",
+      "snippet": "Step onto the curb or the edge of the sidewalk. Do not stand in the road or you may get hit by other vehicles. Look for an available taxi. An available taxi will have its number illuminated. Raise your arm high to signal the driver."
+    },
+    {
+      "type": "organic",
+      "link": "https://www.taxifarefinder.com/",
+      "anchor": "TaxiFareFinder - Find Taxi Rates and Fares Worldwide",
+      "snippet": "TaxiFareFinder is a free taxi fare calculator and estimator. Quickly estimate your taxi fare in over 1,000 cities worldwide. Compare cab rates and find the cheapest ride."
+    },
+    {
+      "type": "organic",
+      "link": "https://www.freenow.com/",
+      "anchor": "FREE NOW - Get a Taxi or Private Driver in Europe",
+      "snippet": "FREE NOW is the multi-mobility app for urban transport. Get a taxi, private driver, eScooter, eBike or car sharing - all in one app. Available across 150+ European cities."
+    },
+    {
+      "type": "organic",
+      "link": "https://www.grab.com/sg/transport/",
+      "anchor": "Grab - Book a Ride, Car or Taxi | Southeast Asia Ride-Hailing",
+      "snippet": "Grab is Southeast Asia's leading ride-hailing and delivery platform. Book a taxi, private car, or GrabBike in seconds. Available in Singapore, Malaysia, Indonesia, Thailand, Vietnam, and Philippines."
+    },
+    {
+      "type": "organic",
+      "link": "https://www.didi-global.com/",
+      "anchor": "DiDi - Your AI-Powered Ride | Get a Taxi Worldwide",
+      "snippet": "DiDi is the world's leading ride-hailing platform providing safe and convenient transportation, food delivery, and financial services to hundreds of millions of users worldwide."
+    },
+    {
+      "type": "organic",
+      "link": "https://www.tripadvisor.com/ShowTopic-g1-i12545-k5994963-Best_taxi_booking_apps-Bargain_Travel.html",
+      "anchor": "Best Taxi Booking Apps for Travelers - Tripadvisor Forum",
+      "snippet": "Discussion about the best taxi booking apps for travelers. Recommendations include Uber, Bolt, FREE NOW, Gett, and local taxi apps. Tips on how to get the best fares and stay safe."
     }
   ],
-  "nextPageLink": "https://www.google.com/search?q=get+taxi&ei=abc123&start=10&sa=N"
+  "nextPageLink": "https://www.google.com/search?q=get+taxi&hl=en&start=10"
 }
